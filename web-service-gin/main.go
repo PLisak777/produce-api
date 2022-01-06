@@ -45,6 +45,7 @@ var prodList = []produce{
 func main() {
 	router := gin.Default()
 	router.GET("/produce", getProduce)
+	router.POST("/produce", postItems)
 
 	router.Run("localhost:8080")
 }
@@ -52,4 +53,18 @@ func main() {
 // getProduce responds with list of all produce in JSON
 func getProduce(c *gin.Context) {
 	c.JSON(http.StatusOK, prodList)
+}
+
+//postItems adds produce from JSON received in req body
+func postItems(c *gin.Context) {
+	var newItem produce
+
+	// Call BindJSON to bind the received JSON to newItem
+	if err := c.BindJSON(&newItem); err != nil {
+		return
+	}
+
+	// Add new item to the slice
+	prodList = append(prodList, newItem)
+	c.JSON(http.StatusCreated, newItem)
 }
