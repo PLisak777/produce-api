@@ -43,10 +43,13 @@ var prodList = []produce{
 }
 
 func main() {
+	router := gin.Default()
+	router.GET("/produce", getProduce)
 
+	router.Run("localhost:8080")
 }
 
 // getProduce responds with list of all produce in JSON
 func getProduce(c *gin.Context) {
-	c.JSON(http.StatusOK, produce)
+	c.JSON(http.StatusOK, prodList)
 }
