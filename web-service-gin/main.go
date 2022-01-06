@@ -45,7 +45,7 @@ func main() {
 		prodRoutes.DELETE("/:id", deleteItem)
 	}	
 
-	if err := r.Run("localhost:8080"); err != nil {
+	if err := r.Run("localhost:4001"); err != nil {
 		log.Fatal(err.Error())
 	}
 }
